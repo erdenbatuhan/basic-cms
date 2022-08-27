@@ -1,0 +1,64 @@
+service: basic-cms
+
+frameworkVersion: "3"
+
+plugins:
+  - serverless-layers
+
+provider:
+  name: aws
+  stage: prod
+  runtime: nodejs14.x
+  region: eu-central-1
+  deploymentBucket: basic-cms-deployment-bucket-9f256880fd3b
+  timeout: 12
+  environment:
+    ["REGION"]: "self:provider.region"
+    ["CMS_STORAGE_BUCKET_NAME"]: "basic-cms-content-bucket-212486bed188"
+    ["CMS_STORAGE_BUCKET_URL"]: "https://basic-cms-content-bucket-212486bed188.s3.eu-central-1.amazonaws.com"
+    ["CMS_STORAGE_BUCKET_DIRECTORY_IMG"]: "img"
+    ["DEFAULT_EXTENSION"]: "png"
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - "s3:ListBucketVersions"
+          Resource:
+            - "arn:aws:s3:::${self:provider.environment.CMS_STORAGE_BUCKET_NAME}"
+        - Effect: "Allow"
+          Action:
+            - "s3:GetObject"
+            - "s3:GetObjectVersion"
+            - "s3:PutObject"
+          Resource:
+            - "arn:aws:s3:::${self:provider.environment.CMS_STORAGE_BUCKET_NAME}/*"
+
+functions:
+  find:
+    memorySize: 256
+    handler: handler.find
+    events:
+      - httpApi:
+          path: / # Query String Parameters: id (required), extension
+          method: get
+  restore:
+    memorySize: 256
+    handler: handler.restore
+    events:
+      - httpApi:
+          path: /restore # Query String Parameters: id (required), versionId (required), extension
+          method: post
+  upload:
+    memorySize: 256
+    handler: handler.upload
+    events:
+      - httpApi:
+          path: /upload # Query String Parameters: id (required), image (required), extension
+          method: post
+
+custom:
+  serverless-layers:
+    - packages:
+        name: packages
+        dependenciesPath: ./package.json

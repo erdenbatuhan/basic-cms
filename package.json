@@ -1,0 +1,20 @@
+{
+  "name": "basic-cms",
+  "version": "0.1.0",
+  "description": "A simple CMS (Content Management System) that stores files by their IDs with version control",
+  "author": "Batuhan Erden",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/erdenbatuhan/basic-cms.git"
+  },
+  "bugs": {
+    "url": "https://github.com/erdenbatuhan/basic-cms/issues"
+  },
+  "devDependencies": {
+    "serverless-layers": "^2.5.1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1181.0"
+  }
+}
