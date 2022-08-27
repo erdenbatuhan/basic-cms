@@ -31,7 +31,7 @@ A simple CMS (Content Management System) that stores files by their IDs with ver
 
         - All options that block public access must be disabled (e.g. _Block all public access = Off_).
 
-    - **Content Bucket** (e.g. _basic-cms-content-bucket-212486bed188):
+    - **Content Bucket** (e.g. _basic-cms-content-bucket-212486bed188_):
 
         - All **options that block public access** must be **disabled** (e.g. _Block all public access = Off_).
         - The **bucket versioning** option should be enabled.
