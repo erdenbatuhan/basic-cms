@@ -28,12 +28,15 @@ A simple CMS (Content Management System) that stores files by their IDs with ver
 3) You must create two buckets on **AWS S3**. Bucket names must be _globally unique_ and _must not contain spaces or uppercase letters_. [See rules for bucket naming](https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
 
     - **Deployment Bucket** (e.g. _basic-cms-deployment-bucket-9f256880fd3b_): This bucket is **OPTIONAL** and you can easily delegate bucket creation to _Serverless_ by removing the **deploymentBucket** attribute from the **serverless.yml** file.
+
         - All options that block public access must be disabled (e.g. _Block all public access = Off_).
 
     - **Content Bucket** (e.g. _basic-cms-content-bucket-212486bed188):
+
         - All **options that block public access** must be **disabled** (e.g. _Block all public access = Off_).
         - The **bucket versioning** option should be enabled.
         - Bucket Policy (This bucket and every object in it must be **publicly accessible**):
+
             ```json
             {
                 "Version": "2012-10-17",
