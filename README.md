@@ -55,10 +55,9 @@ A simple CMS (Content Management System) that stores files by their IDs with ver
             }
             ```
 
-    Do not forget to update the bucket settings in serverless.yml as well:
+    Do not forget to update _the bucket settings_ in **serverless.yml** as well:
 
     ```yml
-    ...
     provider:
         ...
         deploymentBucket: <DEPLOYMENT_BUCKET_NAME_GOES_HERE>
@@ -69,7 +68,6 @@ A simple CMS (Content Management System) that stores files by their IDs with ver
             ["CMS_STORAGE_BUCKET_URL"]: <CONTENT_BUCKET_URL_GOES_HERE>
             ...
         ...
-    ...
     ```
 
 ### Deployment
